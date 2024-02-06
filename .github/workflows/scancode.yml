@@ -38,8 +38,6 @@ jobs:
       run: |
         FILE_NAME=scancode-license-report.html
         scancode --license --html $FILE_NAME --package .
-        ls
-        pwd
         
     - name: Upload license artifacts
       uses: actions/upload-artifact@v4
@@ -50,7 +48,7 @@ jobs:
     
         # A file, directory or wildcard pattern that describes what to upload
         # Required.
-        path: /home/runner/work/calculator-frontend-flask/calculator-frontend-flask/scancode-license-report.html
+        path: /home/runner/work/MLOps-calculator-frontend/MLOps-calculator-frontend/scancode-license-report.html
     
         # The desired behavior if no files are found using the provided path.
         # Available Options:
