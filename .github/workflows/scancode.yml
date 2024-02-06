@@ -38,6 +38,8 @@ jobs:
       run: |
         FILE_NAME=scancode-license-report.html
         scancode --license --html $FILE_NAME --package .
+        ls
+        pwd
         
     - name: Upload license artifacts
       uses: actions/upload-artifact@v4
