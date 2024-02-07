@@ -1,0 +1,35 @@
+name: Auto Tag
+on:
+  push:
+    branches:
+      - main
+      - master
+      - develop*
+      - feature/*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+        # required for all workflows
+        security-events: write
+        contents: write
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Bump version and push tag
+        id: tag_version
+        uses: anothrNick/github-tag-action@1.64.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+
+      - name: Create a GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.tag_version.outputs.new_tag }}
+          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          body: |
+                Changes:
+                - New version: ${{ steps.tag_version.outputs.new_tag }}
